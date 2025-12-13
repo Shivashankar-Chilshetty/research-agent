@@ -1,0 +1,15 @@
+{
+  "name": "research-agent",
+  "module": "index.ts",
+  "type": "module",
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "@langchain/google-genai": "^2.1.0",
+    "@langchain/langgraph": "^1.0.4"
+  }
+}
