@@ -23,5 +23,5 @@ export type QuestionAnswer = z.infer<typeof questionAnswerSchema>;
 export const graphState = Annotation.Root({
     //stores message history(AI msg, User msg etc)
     ...MessagesAnnotation.spec,
-
+    iteration: Annotation<number>, //to track the number of iterations
 })
