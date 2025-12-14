@@ -32,7 +32,7 @@ async function responder(state: typeof graphState.State) {
 
     return {
         messages: [new AIMessage(JSON.stringify(response))], //storing the message in state as AIMessage
-        iteration: 0,
+        iteration: 0, //initialize iteration count
     };
 }
 
@@ -84,7 +84,7 @@ async function revisor(state: typeof graphState.State) {
 
     return {
         messages: [new AIMessage(JSON.stringify(response, null, 2))],
-        iteration: state.iteration + 1,
+        iteration: state.iteration + 1, //increment iteration count
     };
 }
 
@@ -92,4 +92,25 @@ export const graph = new StateGraph(graphState)
     .addNode('responder', responder)
     .addNode('searchExecutor', searchExecutor)
     .addNode('revisor', revisor)
+
+    .addEdge('__start__', 'responder')
+    .addEdge('responder', 'searchExecutor')
+    .addEdge('searchExecutor', 'revisor')
+
+    .addConditionalEdges(
+        'revisor',
+        (state: typeof graphState.State) => {
+            const MAX_ITERATIONS = 2; //searchExecutor -> revisor loop max 2 times
+            if (state.iteration >= MAX_ITERATIONS) {
+                return '__end__';
+            }
+            return 'searchExecutor';
+        }, {
+            __end__: '__end__',
+            searchExecutor: 'searchExecutor'
+        }
+    );
+
+
+
 
