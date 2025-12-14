@@ -2,7 +2,7 @@ import { AIMessage } from '@langchain/core/messages';
 import { llm } from './model';
 import { graphState, questionAnswerSchema } from './state';
 import { StateGraph } from '@langchain/langgraph';
-//import { searchExecutor } from './tools';
+import { searchExecutor } from './tools';
 
 
 async function responder(state: typeof graphState.State) {
@@ -39,4 +39,5 @@ async function responder(state: typeof graphState.State) {
 
 export const graph = new StateGraph(graphState)
     .addNode('responder', responder)
+    .addNode('searchExecutor', searchExecutor)
 

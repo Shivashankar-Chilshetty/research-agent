@@ -17,6 +17,7 @@ export const questionAnswerSchema = z.object({
         ),
 });
 
+//exporting the inferred TypeScript type
 export type QuestionAnswer = z.infer<typeof questionAnswerSchema>;
 
 export const graphState = Annotation.Root({

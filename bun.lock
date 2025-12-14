@@ -7,6 +7,7 @@
         "@langchain/core": "^1.1.5",
         "@langchain/google-genai": "^2.1.0",
         "@langchain/langgraph": "^1.0.4",
+        "@langchain/tavily": "^1.1.0",
         "zod": "^4.1.13",
       },
       "devDependencies": {
@@ -31,6 +32,8 @@
     "@langchain/langgraph-checkpoint": ["@langchain/langgraph-checkpoint@1.0.0", "", { "dependencies": { "uuid": "^10.0.0" }, "peerDependencies": { "@langchain/core": "^1.0.1" } }, "sha512-xrclBGvNCXDmi0Nz28t3vjpxSH6UYx6w5XAXSiiB1WEdc2xD2iY/a913I3x3a31XpInUW/GGfXXfePfaghV54A=="],
 
     "@langchain/langgraph-sdk": ["@langchain/langgraph-sdk@1.2.0", "", { "dependencies": { "p-queue": "^6.6.2", "p-retry": "4", "uuid": "^9.0.0" }, "peerDependencies": { "@langchain/core": "^1.0.1", "react": "^18 || ^19", "react-dom": "^18 || ^19" }, "optionalPeers": ["@langchain/core", "react", "react-dom"] }, "sha512-nFfNJWc9P2job2uUoL37nXfz0VW9eLEtidP0edrgeHUW7BczIQzLXC9ucJHHHGLjlK0S522kmai0abAULv3pGA=="],
+
+    "@langchain/tavily": ["@langchain/tavily@1.1.0", "", { "dependencies": { "zod": "^3.25.76 || ^4" }, "peerDependencies": { "@langchain/core": "^1.0.0" } }, "sha512-RkvBT//wMioKM3O8LrlvzweYJFL6Srhdz0cjVTodZsxQy0FedJ5DQXJ36Ul/11bRES1Oe/XOW8vT7D+fSxJ92Q=="],
 
     "@types/bun": ["@types/bun@1.3.4", "", { "dependencies": { "bun-types": "1.3.4" } }, "sha512-EEPTKXHP+zKGPkhRLv+HI0UEX8/o+65hqARxLy8Ov5rIxMBPNTjeZww00CIihrIQGEQBYg+0roO5qOnS/7boGA=="],
 
