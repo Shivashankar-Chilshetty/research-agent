@@ -6,6 +6,7 @@ import { searchExecutor } from './tools';
 
 
 async function responder(state: typeof graphState.State) {
+    console.log("Responder State:", state);
     const currentDateTime = new Date().toLocaleString('sv-SE');
 
     const SYSTEM_PROMPT = `You are an expert researcher.
@@ -29,6 +30,7 @@ async function responder(state: typeof graphState.State) {
             content: `Reflect on the user's original question and the actions taken thus far. Respond using structured output.`,
         },
     ]);
+    console.log("Responder Response:", response);
 
     return {
         messages: [new AIMessage(JSON.stringify(response))], //storing the message in state as AIMessage
@@ -83,7 +85,7 @@ async function revisor(state: typeof graphState.State) {
     ]);
 
     return {
-        messages: [new AIMessage(JSON.stringify(response, null, 2))],
+        messages: [new AIMessage(JSON.stringify(response))],
         iteration: state.iteration + 1, //increment iteration count
     };
 }
@@ -110,7 +112,3 @@ export const graph = new StateGraph(graphState)
             searchExecutor: 'searchExecutor'
         }
     );
-
-
-
-
