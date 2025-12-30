@@ -6,7 +6,15 @@ import { searchExecutor } from './tools';
 
 
 async function responder(state: typeof graphState.State) {
-    console.log("Responder State:", state);
+    //console.log('responder node:--------')
+    // console.log(
+    // state.messages.map(m => ({
+    //     role: m._getType(),
+    //     content: m.content
+    //   }))
+    // );
+
+
     const currentDateTime = new Date().toLocaleString('sv-SE');
 
     const SYSTEM_PROMPT = `You are an expert researcher.
@@ -22,15 +30,17 @@ async function responder(state: typeof graphState.State) {
     const response = await llmWithStructure.invoke([
         {
             role: 'system',
-            content: SYSTEM_PROMPT,
+            content: `${SYSTEM_PROMPT}. Additional instruction:
+Reflect on the user's original question and the actions taken thus far.
+Respond using structured output`,
         },
-        ...state.messages,
-        {
-            role: 'system',
-            content: `Reflect on the user's original question and the actions taken thus far. Respond using structured output.`,
-        },
+        ...state.messages
+        // {
+        //     role: 'system',
+        //     content: `Reflect on the user's original question and the actions taken thus far. Respond using structured output.`,
+        // },
     ]);
-    console.log("Responder Response:", response);
+    //console.log("Responder Response:", response);
 
     return {
         messages: [new AIMessage(JSON.stringify(response))], //storing the message in state as AIMessage
@@ -69,19 +79,27 @@ async function revisor(state: typeof graphState.State) {
         References:
         - [1] https://example.com/js-features
         - [2] https://example.com/webassembly`;
-
+        //console.log('revisor node:--------')
+        // console.log(
+        //     state.messages.map(m => ({
+        //         role: m._getType(),
+        //         content: m.content
+        //     }))
+        // );
     const llmWithStructure = llm.withStructuredOutput(questionAnswerSchema);
 
     const response = await llmWithStructure.invoke([
         {
             role: 'system',
-            content: SYSTEM_PROMPT,
+            content: `${SYSTEM_PROMPT}. Additional instruction:
+Reflect on the user's original question and the actions taken thus far.
+Respond using structured output`,
         },
-        ...state.messages,
-        {
-            role: 'system',
-            content: `Reflect on the user's original question and the actions taken thus far. Respond using structured output.`,
-        },
+        ...state.messages
+        // {
+        //     role: 'system',
+        //     content: `Reflect on the user's original question and the actions taken thus far. Respond using structured output.`,
+        // },
     ]);
 
     return {
